@@ -16,7 +16,7 @@ var after = lab.after;
 
 var server;
 
-describe('GET /users/{param?}', function(){
+describe('POST /profiles', function(){
   before(function(done){
     Server.init(function(err, srvr){
       if(err){ throw err; }
@@ -30,20 +30,11 @@ describe('GET /users/{param?}', function(){
       Mongoose.disconnect(done);
     });
   });
-
-  it('should return an all users', function(done){
-    server.inject({method: 'GET', url: '/users', credentials: {_id: 3}}, function(response){
+  it('should create a new profile', function(done){
+    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 99}}, function(response){
       expect(response.statusCode).to.equal(200);
-      expect(response.result.length).to.equal(2);
+      expect(response.result.toString()).to.have.length(24);
       done();
     });
   });
-
-  // it('should create a new user', function(done){
-  //   server.inject({method: 'POST', url: '/users', credentials: {firebaseId: 99}}, function(response){
-  //     expect(response.statusCode).to.equal(200);
-  //     expect(response.result.toString()).to.have.length(24);
-  //     done();
-  //   });
-  // });
 });
