@@ -41,20 +41,20 @@ describe('POST /profiles', function(){
       Mongoose.disconnect(done);
     });
   });
-  it('should create a new profile', function(done){
-    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'test', lastName: 'dinh', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
-      expect(response.statusCode).to.equal(200);
-      console.log(response.result, 'lisdfbsdkljfblksdfjh');
-      expect(response.result.lastName).to.equal('dinh');
-      done();
-    });
-  });
-  it('should return a 400', function(done){
-    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'a', lastName: 'dinh', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
-      expect(response.statusCode).to.equal(400);
-      done();
-    });
-  });
+  // it('should create a new profile', function(done){
+  //   server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'test', lastName: 'dinh', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
+  //     expect(response.statusCode).to.equal(200);
+  //     console.log(response.result, 'lisdfbsdkljfblksdfjh');
+  //     expect(response.result.lastName).to.equal('dinh');
+  //     done();
+  //   });
+  // });
+  // it('should return a 400', function(done){
+  //   server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'a', lastName: 'dinh', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
+  //     expect(response.statusCode).to.equal(400);
+  //     done();
+  //   });
+  // });
 });
 
 
