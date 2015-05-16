@@ -30,8 +30,8 @@ describe('POST /profiles', function(){
       Mongoose.disconnect(done);
     });
   });
-  it('should create a new user', function(done){
-    server.inject({method: 'POST', url: '/users', credentials: {firebaseId: 99}}, function(response){
+  it('should create a new profile', function(done){
+    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 99}}, function(response){
       expect(response.statusCode).to.equal(200);
       expect(response.result.toString()).to.have.length(24);
       done();
