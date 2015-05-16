@@ -47,6 +47,13 @@ describe('GET /profiles/{profileId?}', function(){
       done();
     });
   });
+  it('should get all profiles', function(done){
+    server.inject({method: 'GET', url: '/profiles', credentials: {_id: 'b00000000000000000000004'}, payload: {name: 'Chris', gender: 'male'}}, function(response){
+      // expect(response.statusCode).to.equal(200);
+      // expect(response.result).to.have.length(3);
+      done();
+    });
+  });
   it('should get one specific profile and info', function(done){
     server.inject({method: 'GET', url: '/profiles/a00000000000000000000002', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(200);
