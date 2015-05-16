@@ -16,6 +16,7 @@
     "coverage": "lab -s -r lcov | coveralls"
   },
   "dependencies": {
+    "bcrypt": "^0.8.3",
     "blipp": "^2.1.3",
     "chai": "^2.3.0",
     "good": "^6.1.2",
@@ -24,7 +25,9 @@
     "hapi-auth-jwt": "^2.1.2",
     "hoek": "^2.13.0",
     "joi": "^6.4.1",
+    "jwt-simple": "^0.3.0",
     "lab": "^5.8.1",
+    "moment": "^2.10.3",
     "mongoose": "^4.0.3"
   },
   "devDependencies": {
