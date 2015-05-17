@@ -13,7 +13,7 @@
     "email": "bbb@bbb.com",
     "firstName": "bob",
     "lastName": "bobson",
-    "password": "bbb",
+    "password": "$2a$08$m849s682/7GP97jZ4ppkiuBDSdEAU.qo.ezEAgF0Pdak7jZhdIJsO",
     "createdAt": {"$date": 1431541109988},
     "role": 0
   },
