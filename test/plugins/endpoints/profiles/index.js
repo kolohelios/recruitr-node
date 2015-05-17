@@ -46,6 +46,7 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
+  //something wrong with below
   it('should retrieve one profile', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
@@ -80,6 +81,24 @@ describe('GET /profiles/{profileNum}', function(){
       console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(3);
+      done();
+    });
+  });
+  // it('should return an error 400 for the first Profile find', function(done){
+  //   var stub = Sinon.stub(Profile, 'find').yields(new Error());
+  //   server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+  //     expect(response.statusCode).to.equal(400);
+  //     stub.restore();
+  //     done();
+  //   });
+  // });
+  it('should return an error 400 for the second Profile find', function(done){
+    // var queryObj =
+    var stub = Sinon.stub(Profile, 'find');
+    stub.withArgs().yields(new Error());
+    server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
       done();
     });
   });
