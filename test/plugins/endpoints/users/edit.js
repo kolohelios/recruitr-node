@@ -1,38 +1,29 @@
-/* eslint no-unused-expressions: 0 */
-
 'use strict';
 
 var Chai = require('chai');
 var Lab = require('lab');
 var Mongoose = require('mongoose');
-var Server = require('../../../../lib/server');
+var CP = require('child_process');
+var Path = require('path');
 var Sinon = require('sinon');
+var Server = require('../../../../lib/server');
 var User = require('../../../../lib/models/user');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
 var expect = Chai.expect;
 var it = lab.test;
+var beforeEach = lab.beforeEach;
 var before = lab.before;
 var after = lab.after;
-var CP = require('child_process');
-var Path = require('path');
-var beforeEach = lab.beforeEach;
-
 var server;
 
-describe('PUT /users', function(){
+describe('PUT /profiles/{profileId}', function(){
   before(function(done){
     Server.init(function(err, srvr){
       if(err){ throw err; }
       server = srvr;
       done();
-    });
-  });
-
-  after(function(done){
-    server.stop(function(){
-      Mongoose.disconnect(done);
     });
   });
   beforeEach(function(done){
@@ -41,25 +32,37 @@ describe('PUT /users', function(){
       done();
     });
   });
-  it('should edit an existing user', function(done){
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {firstName: 'Tiger', lastName: 'Woods', email: 'andrewawesome@test.com', company: 'Golf clubs Plus', password: '3214', role: 10, createdAt: 1431815526141}}, function(response){
+  after(function(done){
+    server.stop(function(){
+      Mongoose.disconnect(done);
+    });
+  });
+  it('should edit an existing profile', function(done){
+    server.inject({method: 'PUT', url: '/profiles/a00000000000000000000002', credentials: {_id: 'b00000000000000000000004'}, payload: {firstName: 'test', lastName: 'whosit', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
       expect(response.statusCode).to.equal(200);
+      expect(response.result.lastName).to.equal('whosit');
       done();
     });
   });
-  it('should cause a db error', function(done){
+  it('should return error for non-admin', function(done){
+    server.inject({method: 'PUT', url: '/profiles/a00000000000000000000002', credentials: {_id: 'b00000000000000000000001'}, payload: {firstName: 'test', lastName: 'whosit', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      done();
+    });
+  });
+  it('should cause db error on findOne', function(done){
     var stub = Sinon.stub(User, 'findOne').yields(new Error());
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 10, createdAt: 1431815526141}}, function(response){
+    server.inject({method: 'PUT', url: '/profiles/a00000000000000000000002', credentials: {_id: 'b00000000000000000000001'}, payload: {firstName: 'test', lastName: 'whosit', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
     });
   });
-  it('should cause a db error', function(done){
-    var stub = Sinon.stub(User.prototype, 'save').yields(new Error());
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 0, createdAt: 1431815526141}}, function(response){
+  it('should cause error if invalid payload', function(done){
+    // var stub = Sinon.stub(User, 'findOne').yields(new Error());
+    server.inject({method: 'PUT', url: '/profiles/a00000000000000000000002', credentials: {_id: 'b00000000000000000000001'}, payload: {firstName: 'test', lastName: 5, photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
       expect(response.statusCode).to.equal(400);
-      stub.restore();
+      // stub.restore();
       done();
     });
   });
