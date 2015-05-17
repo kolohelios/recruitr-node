@@ -34,34 +34,53 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
-
   after(function(done){
     server.stop(function(){
       Mongoose.disconnect(done);
     });
   });
-  it('should get all profiles', function(done){
-    server.inject({method: 'GET', url: '/profiles/2/', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+  it('should retrieve a query string', function(done){
+    server.inject({method: 'GET', url: '/profiles?page=2&skill=Node', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(2);
-      expect(response.result.total).to.equal(12);
       done();
     });
   });
-  // it('should expect total length to be 12', function(done){
-  //   server.inject({method: 'GET', url: '/profiles/2/', credentials: {_id: 'b00000000000000000000004'}, payload: {name: 'Chris', gender: 'male'}}, function(response){
-  //     expect(response.statusCode).to.equal(200);
-  //     console.log(response.result);
-  //     // expect(response.result).to.have.length(3);
-  //     done();
-  //   });
-  // });
-  // it('should throw an error', function(done){
-  //   var stub = Sinon.stub(Profile, 'find').yields(new Error());
-  //   server.inject({method: 'GET', url: '/profiles/2/', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-  //     expect(response.statusCode).to.equal(400);
-  //     stub.restore();
-  //     done();
-  //   });
-  // });
+  it('should retrieve one profile', function(done){
+    server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.profiles).to.have.length(1);
+      expect(response.result.profiles[0].skills[0]).to.equal('Joi');
+      done();
+    });
+  });
+  it('should retrieve base on multiple skills', function(done){
+    server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi&skill=Node', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.profiles).to.have.length(1);
+      expect(response.result.profiles.length).to.have.equal(1);
+      expect(response.result.profiles[0].skills[0]).to.equal('Joi');
+      done();
+    });
+  });
+  it('should retrieve any of the specified search criteria', function(done){
+    server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.profiles).to.have.length(1);
+      expect(response.result.profiles.length).to.have.equal(1);
+      expect(response.result.profiles[0].skills[0]).to.equal('Joi');
+      done();
+    });
+  });
+  it('should return array of length 10', function(done){
+    server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.profiles).to.have.length(3);
+      done();
+    });
+  });
 });
