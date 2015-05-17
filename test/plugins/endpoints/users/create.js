@@ -59,7 +59,7 @@ describe('POST /users', function(){
   });
   it('should bitch about creating an old user', function(done){
     server.inject({method: 'POST', url: '/users', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'ccc@ccc.com', password: '321'}}, function(response){
-      expect(response.statusCode).to.equal(418);
+      expect(response.statusCode).to.equal(400);
       done();
     });
   });
