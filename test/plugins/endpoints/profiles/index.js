@@ -8,7 +8,7 @@ var Mongoose = require('mongoose');
 var Server = require('../../../../lib/server');
 var CP = require('child_process');
 var Path = require('path');
-var Sinon = require('sinon');
+// var Sinon = require('sinon');
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
 var expect = Chai.expect;
@@ -16,7 +16,7 @@ var it = lab.test;
 var before = lab.before;
 var after = lab.after;
 var beforeEach = lab.beforeEach;
-var Profile = require('../../../../lib/models/profile');
+// var Profile = require('../../../../lib/models/profile');
 
 var server;
 
@@ -46,7 +46,7 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
-  //something wrong with below
+  // something wrong with below
   it('should retrieve one page of profiles', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
@@ -83,7 +83,7 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
-  // it('should return an error 400 for the first Profile find', function(done){
+  // it('should return an error 400 for finding with a query', function(done){
   //   var stub = Sinon.stub(Profile, 'find').yields(new Error());
   //   server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
   //     expect(response.statusCode).to.equal(400);
@@ -91,14 +91,12 @@ describe('GET /profiles/{profileNum}', function(){
   //     done();
   //   });
   // });
-  it('should return an error 400 for the second Profile find', function(done){
-    // var queryObj =
-    var stub = Sinon.stub(Profile, 'find');
-    stub.withArgs().yields(new Error());
-    server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-      expect(response.statusCode).to.equal(400);
-      stub.restore();
-      done();
-    });
-  });
+  // it('should return an error 400 for find with only page number', function(done){
+  //   var stub = Sinon.stub(Profile, 'find').yields(new Error());
+  //   server.inject({method: 'GET', url: '/profiles?page=1', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+  //     expect(response.statusCode).to.equal(400);
+  //     stub.restore();
+  //     done();
+  //   });
+  // });
 });
