@@ -44,7 +44,7 @@ describe('DELETE /users/{userId}', function(){
       done();
     });
   });
-  it('should delete a new user', function(done){
+  it('should delete a user', function(done){
     server.inject({method: 'DELETE', url: '/users/b00000000000000000000001', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(200);
       done();
@@ -57,7 +57,7 @@ describe('DELETE /users/{userId}', function(){
     });
   });
   it('should return an error if user to delete is not found', function(done){
-    var stub = Sinon.stub(User, 'findOne').yields(new Error());
+    var stub = Sinon.stub(User, 'findByIdAndRemove').yields(new Error());
     server.inject({method: 'DELETE', url: '/users/b00000000000000000000002', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
@@ -70,13 +70,12 @@ describe('DELETE /users/{userId}', function(){
       done();
     });
   });
-  // it('should return null after user is removed', function(done){
-  //   var stub = Sinon.stub(User, 'findOne');
-  //   stub.onCall(1).yields(new Error());
-  //   server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-  //     expect(response.statusCode).to.equal(400);
-  //     stub.restore();
-  //     done();
-  //   });
-  // });
+  it('should throw err on findOne', function(done){
+    var stub = Sinon.stub(User, 'findOne').yields(new Error());
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
 });
