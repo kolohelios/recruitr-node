@@ -83,4 +83,12 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
+  it('should return an error 400 for the first Profile find', function(done){
+    var stub = Sinon.stub(Profile, 'find').yields(new Error());
+    server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
 });
