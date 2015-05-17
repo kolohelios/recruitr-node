@@ -1,21 +1,29 @@
 [
   {
     "_id": {"$oid": "b00000000000000000000001"},
+    "email": "aaa@aaa.com",
+    "password": "aaa",
     "createdAt": {"$date": 1431541042952},
     "role": "viewer"
   },
   {
     "_id": {"$oid": "b00000000000000000000002"},
+    "email": "bbb@bbb.com",
+    "password": "bbb",
     "createdAt": {"$date": 1431541109988},
     "role": "viewer"
   },
   {
     "_id": {"$oid": "b00000000000000000000003"},
+    "email": "ccc@ccc.com",
+    "password": "ccc",
     "createdAt": {"$date": 1431541109988},
     "role": "superviewer"
   },
   {
     "_id": {"$oid": "b00000000000000000000004"},
+    "email": "ddd@ddd.com",
+    "password": "ddd",
     "createdAt": {"$date": 1431541109988},
     "role": "admin"
   }
