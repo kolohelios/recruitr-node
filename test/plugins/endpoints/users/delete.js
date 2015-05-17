@@ -45,34 +45,35 @@ describe('DELETE /users/{userId}', function(){
     });
   });
   it('should delete a new user', function(done){
-    server.inject({method: 'DELETE', url: '/users/b00000000000000000000001', credentials: {_id: 'b00000000000000000000004'}},function(response){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000001', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
   it('should return an error because user does not exist', function(done){
-    server.inject({method: 'DELETE', url: '/users/b00000000000000000000009', credentials: {_id: 'b00000000000000000000004'}},function(response){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000009', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(400);
       done();
     });
   });
   it('should return an error if user to delete is not found', function(done){
     var stub = Sinon.stub(User, 'findOne').yields(new Error());
-    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002', credentials: {_id: 'b00000000000000000000004'}},function(response){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
     });
   });
   it('should return an error if user is not admin', function(done){
-    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002', credentials: {_id: 'b00000000000000000000003'}},function(response){
+    server.inject({method: 'DELETE', url: '/users/b00000000000000000000002', credentials: {_id: 'b00000000000000000000003'}}, function(response){
       expect(response.statusCode).to.equal(400);
       done();
     });
   });
   // it('should return null after user is removed', function(done){
-  //   var stub = Sinon.stub(User, 'findOne').onCall(1).yields(new Error());
-  //   server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}},function(response){
+  //   var stub = Sinon.stub(User, 'findOne');
+  //   stub.onCall(1).yields(new Error());
+  //   server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}}, function(response){
   //     expect(response.statusCode).to.equal(400);
   //     stub.restore();
   //     done();
