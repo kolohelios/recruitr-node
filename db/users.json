@@ -1,25 +1,21 @@
 [
   {
-    "_id": {"$oid": "a00000000000000000000001"},
-    "firebaseId": "twitter:3",
+    "_id": {"$oid": "b00000000000000000000001"},
     "createdAt": {"$date": 1431541042952},
     "role": "viewer"
   },
   {
-    "_id": {"$oid": "a00000000000000000000002"},
-    "firebaseId": "facebook:5",
+    "_id": {"$oid": "b00000000000000000000002"},
     "createdAt": {"$date": 1431541109988},
     "role": "viewer"
   },
   {
-    "_id": {"$oid": "a00000000000000000000003"},
-    "firebaseId": "facebook:6",
+    "_id": {"$oid": "b00000000000000000000003"},
     "createdAt": {"$date": 1431541109988},
     "role": "superviewer"
   },
   {
-    "_id": {"$oid": "a00000000000000000000004"},
-    "firebaseId": "facebook:7",
+    "_id": {"$oid": "b00000000000000000000004"},
     "createdAt": {"$date": 1431541109988},
     "role": "admin"
   }

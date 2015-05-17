@@ -17,7 +17,7 @@
     "contact": {
       "email": "test1@test.com",
       "phone": "510-345-6789",
-      "addresss": "125 Main St, Fremont, CA 94555"
+      "address": "125 Main St, Fremont, CA 94555"
     },
     "social": {
       "github": "https://github.com/andrewtdinh",
@@ -45,7 +45,7 @@
     "contact": {
       "email": "test2@test.com",
       "phone": "510-345-1234",
-      "addresss": "345 Main St, Fremont, CA 94555"
+      "address": "345 Main St, Fremont, CA 94555"
     },
     "social": {
       "github": "https://github.com/greygatch",
@@ -73,7 +73,7 @@
     "contact": {
       "email": "test3@test.com",
       "phone": "510-345-6666",
-      "addresss": "567 Main St, Fremont, CA 94555"
+      "address": "567 Main St, Fremont, CA 94555"
     },
     "social": {
       "github": "https://github.com/lifepupil",
