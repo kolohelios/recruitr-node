@@ -46,6 +46,7 @@ describe('GET /profiles/{profileNum}', function(){
       done();
     });
   });
+  //something wrong with below
   it('should retrieve one profile', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi', credentials: {_id: 'b00000000000000000000004'}}, function(response){
       console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
