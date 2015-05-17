@@ -21,7 +21,7 @@ var beforeEach = lab.beforeEach;
 
 var server;
 
-describe('POST /users', function(){
+describe('PUT /users', function(){
   before(function(done){
     Server.init(function(err, srvr){
       if(err){ throw err; }
@@ -42,14 +42,14 @@ describe('POST /users', function(){
     });
   });
   it('should edit an existing user', function(done){
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 'admin', createdAt: 1431815526141}}, function(response){
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {firstName: 'Tiger', lastName: 'Woods', email: 'andrewawesome@test.com', company: 'Golf clubs Plus', password: '3214', role: 10, createdAt: 1431815526141}}, function(response){
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
   it('should cause a db error', function(done){
     var stub = Sinon.stub(User, 'findOne').yields(new Error());
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 'admin', createdAt: 1431815526141}}, function(response){
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 10, createdAt: 1431815526141}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();
@@ -57,7 +57,7 @@ describe('POST /users', function(){
   });
   it('should cause a db error', function(done){
     var stub = Sinon.stub(User.prototype, 'save').yields(new Error());
-    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 'viewer', createdAt: 1431815526141}}, function(response){
+    server.inject({method: 'PUT', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}, payload: {email: 'andrewawesome@test.com', password: '3214', role: 0, createdAt: 1431815526141}}, function(response){
       expect(response.statusCode).to.equal(400);
       stub.restore();
       done();

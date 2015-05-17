@@ -71,8 +71,9 @@ describe('DELETE /users/{userId}', function(){
     });
   });
   // it('should return null after user is removed', function(done){
-  //   var stub = Sinon.stub(User, 'findOne').onCall(1).yields(new Error());
-  //   server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}},function(response){
+  //   var stub = Sinon.stub(User, 'findOne');
+  //   stub.onCall(1).yields(new Error());
+  //   server.inject({method: 'DELETE', url: '/users/b00000000000000000000003', credentials: {_id: 'b00000000000000000000004'}}, function(response){
   //     expect(response.statusCode).to.equal(400);
   //     stub.restore();
   //     done();
