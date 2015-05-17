@@ -56,12 +56,12 @@ describe('GET /profiles/{profileNum}', function(){
   //     done();
   //   });
   // });
-  // it('should throw an error', function(done){
-  //   var stub = Sinon.stub(Profile, 'find').yields(new Error());
-  //   server.inject({method: 'GET', url: '/profiles/2/', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-  //     expect(response.statusCode).to.equal(400);
-  //     stub.restore();
-  //     done();
-  //   });
-  // });
+  it('should throw an error', function(done){
+    var stub = Sinon.stub(Profile, 'find').yields(new Error());
+    server.inject({method: 'GET', url: '/profiles/2/', credentials: {_id: 'b00000000000000000000004'}}, function(response){
+      expect(response.statusCode).to.equal(400);
+      stub.restore();
+      done();
+    });
+  });
 });
