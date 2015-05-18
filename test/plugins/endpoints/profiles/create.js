@@ -40,7 +40,7 @@ describe('POST /profiles', function(){
     });
   });
   it('should create a new profile', function(done){
-    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'test', lastName: 'dinh', photo: 'photostring', skills: ['Jade', 'Html'], exposure: ['a', 'b'], bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
+    server.inject({method: 'POST', url: '/profiles', credentials: {firebaseId: 'a00000000000000000000001'}, payload: {firstName: 'test', lastName: 'dinh', photo: {}, skills: ['Jade', 'Html'], exposure: 'a', bio: 'Yeah', location: 'Fremont', interests: ['Nothing'], remote: true, relocate: false, locationPref: ['San Francisco'], education: 'Carleton', contact: {email: 'test@test.com'}, social: {github: 'mygitty'}}}, function(response){
       expect(response.statusCode).to.equal(200);
       expect(response.result.lastName).to.equal('dinh');
       done();

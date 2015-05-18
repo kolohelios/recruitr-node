@@ -49,7 +49,6 @@ describe('GET /profiles/{profileNum}', function(){
   // something wrong with below
   it('should retrieve one page of profiles', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(10);
       done();
@@ -57,7 +56,6 @@ describe('GET /profiles/{profileNum}', function(){
   });
   it('should retrieve base on multiple skills', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi&skill=Node', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(1);
       expect(response.result.profiles.length).to.have.equal(1);
@@ -67,7 +65,6 @@ describe('GET /profiles/{profileNum}', function(){
   });
   it('should retrieve any of the specified search criteria', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1&skill=Joi', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(1);
       expect(response.result.profiles.length).to.have.equal(1);
@@ -77,7 +74,6 @@ describe('GET /profiles/{profileNum}', function(){
   });
   it('should return array of length 10', function(done){
     server.inject({method: 'GET', url: '/profiles?page=1&locationPref=San%20Francisco%20CA', credentials: {_id: 'b00000000000000000000004'}}, function(response){
-      console.log(response.result.profiles, 'sjfhds;kafjh;ksdhf;kadsjf');
       expect(response.statusCode).to.equal(200);
       expect(response.result.profiles).to.have.length(3);
       done();
