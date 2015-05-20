@@ -28,6 +28,7 @@
     "lab": "^5.8.1",
     "moment": "^2.10.3",
     "mongoose": "^4.0.3",
+    "node-mandrill": "^1.0.1",
     "queryfilter": "0.0.4"
   },
   "devDependencies": {
