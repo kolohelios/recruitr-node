@@ -1,26 +1,38 @@
 [
   {
     "_id": {"$oid": "b00000000000000000000001"},
-    "firebaseId": "twitter:3",
+    "email": "aaa@aaa.com",
+    "firstName": "jib",
+    "lastName": "mcgee",
+    "password": "aaa",
     "createdAt": {"$date": 1431541042952},
-    "role": "viewer"
+    "role": 0
   },
   {
     "_id": {"$oid": "b00000000000000000000002"},
-    "firebaseId": "facebook:5",
+    "email": "bbb@bbb.com",
+    "firstName": "bob",
+    "lastName": "bobson",
+    "password": "$2a$08$m849s682/7GP97jZ4ppkiuBDSdEAU.qo.ezEAgF0Pdak7jZhdIJsO",
     "createdAt": {"$date": 1431541109988},
-    "role": "viewer"
+    "role": 0
   },
   {
     "_id": {"$oid": "b00000000000000000000003"},
-    "firebaseId": "facebook:6",
+    "email": "ccc@ccc.com",
+    "firstName": "Chip",
+    "lastName": "oinweofinw",
+    "password": "ccc",
     "createdAt": {"$date": 1431541109988},
-    "role": "superviewer"
+    "role": 5
   },
   {
     "_id": {"$oid": "b00000000000000000000004"},
-    "firebaseId": "facebook:7",
+    "email": "ddd@ddd.com",
+    "firstName": "administratorator",
+    "lastName": "oifnweeeeee",
+    "password": "ddd",
     "createdAt": {"$date": 1431541109988},
-    "role": "admin"
+    "role": 10
   }
 ]
