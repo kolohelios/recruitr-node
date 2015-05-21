@@ -34,5 +34,16 @@
     "password": "ddd",
     "createdAt": {"$date": 1431541109988},
     "role": 10
-  }
+  },
+  {
+    "_id" : {"$oid": "5558faefd2630218636123fd"},
+    "firstName" : "admin",
+    "lastName" : "admin",
+    "company" : "company",
+    "email" : "admin@c.c",
+    "password" : "$2a$08$BYaoP949WGai1HQx3xgXXeLE7HtJT4/WMw2tJ8LR220mZnG4k3q4W",
+    "createdAt" : {"$date": 1431541109998},
+    "role" : 10,
+    "__v" : 0
+}
 ]
